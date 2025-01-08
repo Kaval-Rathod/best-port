@@ -27,6 +27,10 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
       },
+      transitionProperty: {
+        'width': 'width',
+        'spacing': 'margin, padding',
+      }
     },
   },
   plugins: [],
