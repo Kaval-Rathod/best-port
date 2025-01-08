@@ -9,28 +9,138 @@
 }
 
 @layer components {
-  .role-text {
+  /* Common Text Effects */
+  .text-link {
     @apply cursor-pointer relative inline-block;
   }
   
-  .role-text::after {
+  .text-link::after {
     @apply content-[''] absolute bottom-0 left-0 w-0 h-[1px] bg-black dark:bg-white transition-all duration-300;
   }
   
-  .role-text:hover::after {
+  .text-link:hover::after {
     @apply w-full;
   }
 
-  .hover-lift {
-    @apply transition-all duration-500;
-  }
-  
-  .hover-lift:hover {
-    @apply -translate-y-1 shadow-lg;
+  /* Project Cards - Web Developer */
+  .project-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12;
   }
 
+  .project-card {
+    @apply relative h-[300px] md:h-[400px] bg-black/5 dark:bg-white/5 overflow-hidden cursor-pointer;
+  }
+
+  .project-card-content {
+    @apply absolute inset-0 p-8 flex flex-col justify-between transition-transform duration-700 ease-out;
+    transform-style: preserve-3d;
+  }
+
+  .project-card-front {
+    @apply bg-white dark:bg-black;
+  }
+
+  .project-card-back {
+    @apply bg-black dark:bg-white text-white dark:text-black -translate-y-full;
+  }
+
+  .project-card:hover .project-card-front {
+    @apply translate-y-full;
+  }
+
+  .project-card:hover .project-card-back {
+    @apply translate-y-0;
+  }
+
+  /* Project Cards - UX Designer */
+  .design-card {
+    @apply relative overflow-hidden rounded-lg cursor-pointer;
+    height: 450px;
+  }
+
+  .design-card-content {
+    @apply absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-black/80 to-transparent text-white transform transition-all duration-500;
+  }
+
+  .design-card-image {
+    @apply absolute inset-0 w-full h-full object-cover transition-transform duration-700 scale-100;
+  }
+
+  .design-card:hover .design-card-image {
+    @apply scale-110;
+  }
+
+  .design-card-title {
+    @apply text-3xl font-light mb-4 transform transition-all duration-500 translate-y-10 opacity-0;
+  }
+
+  .design-card:hover .design-card-title {
+    @apply translate-y-0 opacity-100;
+  }
+
+  .design-card-description {
+    @apply transform transition-all duration-500 translate-y-10 opacity-0 delay-100;
+  }
+
+  .design-card:hover .design-card-description {
+    @apply translate-y-0 opacity-100;
+  }
+
+  /* Project Cards - React Native */
+  .app-card {
+    @apply relative bg-white dark:bg-black border border-black/10 dark:border-white/10 rounded-2xl overflow-hidden;
+    height: 500px;
+  }
+
+  .app-card-phone {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[580px] bg-black rounded-[3rem] p-4 transition-all duration-700;
+    transform-style: preserve-3d;
+  }
+
+  .app-card:hover .app-card-phone {
+    @apply scale-95 rotate-12;
+  }
+
+  .app-screen {
+    @apply w-full h-full bg-white dark:bg-gray-900 rounded-[2.5rem] overflow-hidden relative;
+  }
+
+  .app-content {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+  }
+
+  .app-card:hover .app-content {
+    @apply opacity-100;
+  }
+
+  /* Common Elements */
+  .project-image {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-700 object-cover;
+  }
+
+  .project-card:hover .project-image {
+    @apply opacity-60;
+  }
+
+  .project-title {
+    @apply text-3xl font-light transition-transform duration-500;
+  }
+
+  .project-tags {
+    @apply flex flex-wrap gap-2 transition-all duration-500 opacity-0;
+  }
+
+  .project-card:hover .project-tags {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .tag {
+    @apply px-3 py-1 text-sm border border-current rounded-full;
+  }
+
+  /* Text Effects */
   .text-glitch {
-    @apply relative;
+    @apply relative cursor-pointer;
   }
 
   .text-glitch:hover::before,
@@ -41,50 +151,141 @@
   }
 
   .text-glitch:hover::before {
-    @apply text-black dark:text-white left-[2px];
+    @apply text-black dark:text-white left-[2px] top-[2px];
+    text-shadow: -2px 0 #00ff00;
     animation: glitch 0.4s infinite linear alternate-reverse;
   }
 
   .text-glitch:hover::after {
-    @apply text-black dark:text-white left-[-2px];
+    @apply text-black dark:text-white left-[-2px] top-[-2px];
+    text-shadow: 2px 0 #ff0000;
     animation: glitch 0.3s infinite linear alternate-reverse;
   }
 
-  @keyframes glitch {
-    0% {
-      clip: rect(24px, 450px, 90px, 0);
-    }
-    20% {
-      clip: rect(62px, 450px, 72px, 0);
-    }
-    40% {
-      clip: rect(32px, 450px, 54px, 0);
-    }
-    60% {
-      clip: rect(78px, 450px, 82px, 0);
-    }
-    80% {
-      clip: rect(15px, 450px, 68px, 0);
-    }
-    100% {
-      clip: rect(44px, 450px, 97px, 0);
-    }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500 hover:from-pink-500 hover:to-purple-500 transition-all duration-500;
+    background-size: 200% 200%;
   }
 
+  .text-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes glitch {
+    0% { clip: rect(24px, 450px, 90px, 0); }
+    20% { clip: rect(62px, 450px, 72px, 0); }
+    40% { clip: rect(32px, 450px, 54px, 0); }
+    60% { clip: rect(78px, 450px, 82px, 0); }
+    80% { clip: rect(15px, 450px, 68px, 0); }
+    100% { clip: rect(44px, 450px, 97px, 0); }
+  }
+
+  /* Section Titles */
+  .section-title {
+    @apply text-3xl font-light mb-12 relative inline-block;
+  }
+
+  .section-title::after {
+    @apply content-[''] absolute -bottom-2 left-0 w-1/4 h-[2px] bg-black dark:bg-white transition-all duration-500;
+  }
+
+  .section-title:hover::after {
+    @apply w-full;
+  }
+
+  /* Navigation */
   .role-switcher {
-    @apply fixed bottom-8 right-8 p-4 bg-white dark:bg-black border border-black dark:border-white rounded-full shadow-lg;
+    @apply fixed bottom-8 right-8 p-4 bg-white dark:bg-black border border-black dark:border-white rounded-full shadow-lg transition-all duration-500;
     transform-origin: center;
   }
 
   .role-switcher:hover {
-    @apply scale-110;
+    @apply scale-110 rotate-180;
   }
 
-  .page-transition {
-    @apply transition-all duration-700 ease-in-out;
+  /* Buttons */
+  .button-primary {
+    @apply px-8 py-3 border-2 border-black dark:border-white transition-all duration-500 relative overflow-hidden;
   }
 
+  .button-primary::before {
+    @apply content-[''] absolute inset-0 bg-black dark:bg-white -translate-x-full transition-transform duration-500;
+  }
+
+  .button-primary:hover::before {
+    @apply translate-x-0;
+  }
+
+  .button-text {
+    @apply relative z-10 transition-colors duration-500;
+  }
+
+  .group:hover .button-text {
+    @apply text-white dark:text-black;
+  }
+
+  /* Layout */
   .page-container {
-    @apply max-w-4xl mx-auto px-6 py-16 md:py-24;
+    @apply max-w-6xl mx-auto px-6 py-16 md:py-24;
+  }
+
+  /* Mobile Optimizations */
+  @media (max-width: 768px) {
+    .project-card {
+      @apply h-[250px];
+    }
+
+    .project-card-content {
+      @apply p-6;
+    }
+
+    .project-title {
+      @apply text-2xl;
+    }
+
+    .project-card-back {
+      @apply translate-y-0 opacity-0;
+    }
+
+    .project-card:hover .project-card-back {
+      @apply opacity-100;
+    }
+
+    .project-card-front {
+      @apply absolute;
+    }
+
+    .project-card:hover .project-card-front {
+      @apply opacity-0;
+    }
+
+    .design-card {
+      height: 350px;
+    }
+
+    .app-card {
+      height: 400px;
+    }
+
+    .app-card-phone {
+      @apply w-[200px] h-[400px];
+    }
+  }
+
+  /* Scroll Animations */
+  .scroll-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .scroll-fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
