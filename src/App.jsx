@@ -1,15 +1,21 @@
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { SunIcon, MoonIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
+
+// Components
+import Header from './components/Header';
 import WebDeveloper from './components/pages/WebDeveloper';
 import UXDesigner from './components/pages/UXDesigner';
 import ReactNative from './components/pages/ReactNative';
 
+// Configuration
+import { PERSONAL_INFO } from './config';
+
 const roles = [
-  { path: '/', title: 'Web Developer' },
-  { path: '/ux', title: 'UI/UX Designer' },
-  { path: '/react-native', title: 'React Native Developer' }
+  { path: '/', title: PERSONAL_INFO.roles[0] },
+  { path: '/ux', title: PERSONAL_INFO.roles[1] },
+  { path: '/react-native', title: PERSONAL_INFO.roles[2] }
 ];
 
 function RoleSwitcher() {
@@ -35,8 +41,13 @@ function RoleSwitcher() {
 }
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const location = useLocation();
+
+  useEffect(() => {
+    // Apply dark mode by default
+    document.documentElement.classList.add('dark');
+  }, []);
 
   useEffect(() => {
     if (darkMode) {
@@ -47,19 +58,9 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="min-h-screen">
-      <button
-        onClick={() => setDarkMode(!darkMode)}
-        className="fixed top-8 right-8 p-4 bg-white dark:bg-black border border-black dark:border-white rounded-full transition-all duration-500 hover:scale-110"
-        aria-label="Toggle dark mode"
-      >
-        {darkMode ? (
-          <SunIcon className="w-6 h-6" />
-        ) : (
-          <MoonIcon className="w-6 h-6" />
-        )}
-      </button>
-
+    <div className="min-h-screen bg-white dark:bg-black">
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+      
       <RoleSwitcher />
 
       <AnimatePresence mode="wait">
@@ -69,7 +70,7 @@ function App() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5 }}
-          className="min-h-screen"
+          className="min-h-screen pt-20"
         >
           <Routes>
             <Route path="/" element={<WebDeveloper />} />

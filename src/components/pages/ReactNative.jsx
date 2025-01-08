@@ -28,7 +28,7 @@ const ReactNative = () => {
   return (
     <div className="page-container">
       <motion.h1 
-        className="text-7xl font-light mb-24 text-gradient"
+        className="text-7xl font-light mb-24"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
