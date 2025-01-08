@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white dark:bg-black text-black dark:text-white transition-all duration-500;
+  }
+}
+
+@layer components {
+  .role-text {
+    @apply cursor-pointer relative inline-block;
+  }
+  
+  .role-text::after {
+    @apply content-[''] absolute bottom-0 left-0 w-0 h-[1px] bg-black dark:bg-white transition-all duration-300;
+  }
+  
+  .role-text:hover::after {
+    @apply w-full;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500;
+  }
+  
+  .hover-lift:hover {
+    @apply -translate-y-1 shadow-lg;
+  }
+
+  .text-glitch {
+    @apply relative;
+  }
+
+  .text-glitch:hover::before,
+  .text-glitch:hover::after {
+    @apply content-[attr(data-text)] absolute left-0 w-full h-full;
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch 0.5s infinite linear alternate-reverse;
+  }
+
+  .text-glitch:hover::before {
+    @apply text-black dark:text-white left-[2px];
+    animation: glitch 0.4s infinite linear alternate-reverse;
+  }
+
+  .text-glitch:hover::after {
+    @apply text-black dark:text-white left-[-2px];
+    animation: glitch 0.3s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch {
+    0% {
+      clip: rect(24px, 450px, 90px, 0);
+    }
+    20% {
+      clip: rect(62px, 450px, 72px, 0);
+    }
+    40% {
+      clip: rect(32px, 450px, 54px, 0);
+    }
+    60% {
+      clip: rect(78px, 450px, 82px, 0);
+    }
+    80% {
+      clip: rect(15px, 450px, 68px, 0);
+    }
+    100% {
+      clip: rect(44px, 450px, 97px, 0);
+    }
+  }
+
+  .role-switcher {
+    @apply fixed bottom-8 right-8 p-4 bg-white dark:bg-black border border-black dark:border-white rounded-full shadow-lg;
+    transform-origin: center;
+  }
+
+  .role-switcher:hover {
+    @apply scale-110;
+  }
+
+  .page-transition {
+    @apply transition-all duration-700 ease-in-out;
+  }
+
+  .page-container {
+    @apply max-w-4xl mx-auto px-6 py-16 md:py-24;
+  }
+}
