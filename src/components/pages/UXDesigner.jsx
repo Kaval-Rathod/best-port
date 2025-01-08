@@ -31,12 +31,12 @@ const UXDesigner = () => {
   return (
     <div className="page-container">
       <motion.h1 
-        className="text-7xl font-light mb-24 text-gradient"
+        className="text-7xl pb-5 font-light mb-24 text-gradient"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        Kaval is a UI/UX Designer
+        Kaval as a UI/UX Designer
       </motion.h1>
 
       <div className="space-y-32">
